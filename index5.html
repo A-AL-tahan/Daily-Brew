@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ديلي برو | Daily Brew Coffee</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #110d0a;
+      --card: #1b1511;
+      --card-hover: #241c17;
+      --accent: #d4945a;
+      --accent-soft: rgba(212, 148, 90, 0.14);
+      --cream: #f7efe6;
+      --muted: #b7a89a;
+      --border: rgba(247, 239, 230, 0.1);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: var(--bg);
+      color: var(--cream);
+      line-height: 1.75;
+    }
+
+    .en-title {
+      font-family: 'Playfair Display', serif;
+      letter-spacing: 1px;
+    }
+
+    .container {
+      width: min(1120px, 92%);
+      margin: 0 auto;
+    }
+
+    /* الشريط العلوي */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(17, 13, 10, 0.86);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 0;
+      gap: 16px;
+    }
+
+    .brand {
+      text-decoration: none;
+      color: var(--cream);
+      font-weight: 900;
+      font-size: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 22px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.92rem;
+      transition: color 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px 22px;
+      border-radius: 12px;
+      font-family: 'Cairo', sans-serif;
+      font-weight: 700;
+      font-size: 0.92rem;
+      text-decoration: none;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #16100c;
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.08);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      border-color: var(--border);
+      color: var(--cream);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* القسم الرئيسي */
+    .hero {
+      padding: 72px 0 56px;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .tag {
+      display: inline-block;
+      background: var(--accent-soft);
+      color: var(--accent);
+      padding: 5px 14px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.1rem, 4.5vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1.22;
+      margin-bottom: 14px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1.02rem;
+      margin-bottom: 26px;
+      max-width: 540px;
+    }
+
+    .hero-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .hero-card {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.55);
+    }
+
+    .hero-card img {
+      width: 100%;
+      height: 360px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-caption {
+      position: absolute;
+      bottom: 14px;
+      right: 14px;
+      background: rgba(17, 13, 10, 0.85);
+      backdrop-filter: blur(8px);
+      padding: 8px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    /* الأقسام */
+    section {
+      padding: 64px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .sec-head {
+      margin-bottom: 28px;
+    }
+
+    .sec-head h2 {
+      font-size: 1.9rem;
+      font-weight: 900;
+      margin-bottom: 6px;
+    }
+
+    .sec-head p {
+      color: var(--muted);
+    }
+
+    /* المزايا */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .feature-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+    }
+
+    .feature-box h3 {
+      color: var(--accent);
+      font-size: 1.15rem;
+      margin-bottom: 8px;
+    }
+
+    .feature-box p {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    /* تصفية القائمة */
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 26px;
+    }
+
+    .tab {
+      background: var(--card);
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-family: 'Cairo', sans-serif;
+      font-weight: 700;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .tab.active,
+    .tab:hover {
+      background: var(--accent);
+      color: #16100c;
+      border-color: var(--accent);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .drink-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    }
+
+    .drink-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(212, 148, 90, 0.45);
+      background: var(--card-hover);
+    }
+
+    .drink-card img {
+      width: 100%;
+      height: 175px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .drink-body {
+      padding: 18px;
+    }
+
+    .drink-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .drink-top h3 {
+      font-size: 1.15rem;
+      font-weight: 800;
+    }
+
+    .price {
+      color: var(--accent);
+      font-weight: 800;
+      font-size: 0.95rem;
+      white-space: nowrap;
+    }
+
+    .drink-body p {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    /* الطلب والعروض */
+    .order-banner {
+      background: var(--card);
+      border: 1px solid rgba(212, 148, 90, 0.3);
+      border-radius: var(--radius);
+      padding: 32px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 26px 0;
+      color: var(--muted);
+      font-size: 0.88rem;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 820px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 44px;
+      }
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container nav">
+      <a href="#top" class="brand">
+        <span>☕</span>
+        <span>ديلي برو</span>
+        <small class="en-title" style="color: var(--muted); font-size: 0.85rem;">Daily Brew</small>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#about">عن المقهى</a></li>
+        <li><a href="#menu">القائمة</a></li>
+        <li><a href="#order">الطلب والعروض</a></li>
+      </ul>
+      <a href="#order" class="btn btn-primary">اطلب الآن</a>
+    </div>
+  </header>
+
+  <main id="top" class="container">
+    <!-- Hero -->
+    <section class="hero" style="border-top: none;">
+      <div>
+        <span class="tag en-title">SPECIALTY COFFEE HOUSE</span>
+        <h1>قهوتك اليومية <span>بنكهة متوازنة</span></h1>
+        <p>تجربة قهوة مختصة تجمع بين المحاصيل المنتقاة بعناية، التحضير الدقيق، والأجواء الهادئة للعمل أو الاسترخاء طوال اليوم.</p>
+        <div class="hero-btns">
+          <a href="#menu" class="btn btn-primary">استكشف القائمة</a>
+          <a href="#order" class="btn btn-outline">عروض الصباح</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=80" alt="تحضير القهوة المختصة في ديلي برو">
+        <div class="hero-caption">تحميص طازج وتحضير يومي</div>
+      </div>
+    </section>
+
+    <!-- عن المقهى -->
+    <section id="about">
+      <div class="sec-head">
+        <h2>لماذا ديلي برو؟</h2>
+        <p>نهتم بأدق التفاصيل من اختيار الحبوب حتى تقديم الكوب.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-box">
+          <h3>محاصيل مختارة</h3>
+          <p>حبوب بن مختصة بإيحاءات متنوعة تناسب محبي الإسبريسو والتقطير.</p>
+        </div>
+        <div class="feature-box">
+          <h3>معايير تحضير دقيقة</h3>
+          <p>ضبط دقيق لدرجة الطحن والحرارة لضمان قوام غني ونكهة واضحة.</p>
+        </div>
+        <div class="feature-box">
+          <h3>أجواء مريحة</h3>
+          <p>مساحة هادئة ومناسبة للقراءة أو إنهاء المهام اليومية مع كوبك المفضل.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- القائمة -->
+    <section id="menu">
+      <div class="sec-head">
+        <h2>قائمة المشروبات</h2>
+        <p>اختر الفئة لتصفية المشروبات بسرعة.</p>
+      </div>
+
+      <div class="tabs">
+        <button class="tab active" data-cat="all">الكل</button>
+        <button class="tab" data-cat="hot">مشروبات ساخنة</button>
+        <button class="tab" data-cat="cold">مشروبات باردة</button>
+        <button class="tab" data-cat="brew">تقطير ومختص</button>
+      </div>
+
+      <div class="menu-grid" id="menuGrid">
+        <article class="drink-card" data-cat="hot">
+          <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80" alt="سبانش لاتيه حار">
+          <div class="drink-body">
+            <div class="drink-top">
+              <h3>سبانش لاتيه حار</h3>
+              <span class="price">18 ر.س</span>
+            </div>
+            <p>إسبريسو غني مع حليب مبخر وحلاوة متوازنة وقوام كريمي ناعم.</p>
+          </div>
+        </article>
+
+        <article class="drink-card" data-cat="cold">
+          <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=800&q=80" alt="آيس كراميل لاتيه">
+          <div class="drink-body">
+            <div class="drink-top">
+              <h3>آيس كراميل لاتيه</h3>
+              <span class="price">20 ر.س</span>
+            </div>
+            <p>قهوة باردة منعشة مع حليب مثلج ولمسة كراميل دافئة.</p>
+          </div>
+        </article>
+
+        <article class="drink-card" data-cat="brew">
+          <img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=800&q=80" alt="V60 تقطير يدوي">
+          <div class="drink-body">
+            <div class="drink-top">
+              <h3>V60 تقطير يدوي</h3>
+              <span class="price">21 ر.س</span>
+            </div>
+            <p>قهوة مقطرة يدوياً تبرز وضوح النكهة والعطرية الطبيعية للبن.</p>
+          </div>
+        </article>
+
+        <article class="drink-card" data-cat="hot">
+          <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?auto=format&fit=crop&w=800&q=80" alt="كابتشينو كلاسيك">
+          <div class="drink-body">
+            <div class="drink-top">
+              <h3>كابتشينو كلاسيك</h3>
+              <span class="price">16 ر.س</span>
+            </div>
+            <p>توازن مثالي بين الإسبريسو، الحليب الدافئ، ورغوة الحليب الكثيفة.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- الطلب والعروض -->
+    <section id="order">
+      <div class="order-banner">
+        <div>
+          <span class="tag">عرض الصباح اليومي</span>
+          <h2 style="font-size: 1.65rem; margin-bottom: 6px;">قهوة + مخبوزات طازجة بـ 24 ر.س</h2>
+          <p style="color: var(--muted);">متوفر يومياً من 7:00 صباحاً حتى 11:30 صباحاً عبر الطلب المباشر.</p>
+        </div>
+        <a href="https://wa.me/966570360129?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D8%AF%D9%8A%D9%84%D9%8A%20%D8%A8%D8%B1%D9%88%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D9%85%D8%B4%D8%B1%D9%88%D8%A8" target="_blank" class="btn btn-primary">اطلب عبر واتساب</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      ديلي برو (Daily Brew) — مشروع واجهة مقهى مختص
+    </div>
+  </footer>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab');
+    const drinks = document.querySelectorAll('.drink-card');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        const cat = tab.dataset.cat;
+        drinks.forEach(card => {
+          card.style.display = (cat === 'all' || card.dataset.cat === cat) ? 'block' : 'none';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
